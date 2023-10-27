@@ -4,12 +4,14 @@ import java.awt.*;
 
 public class GameLayout extends JFrame {
 
+    private int rows = 4;
+    private int columns = 4;
+    private int buttonSize = 80;
 
     JPanel gamePanel; // som grund för hela spelytan
     JPanel namePanel; // för rubrik
     JPanel buttonPanel; // att placera alla knappar på
-    JPanel newGamePanel; // för new game knapp
-    JLabel gameName;
+    JLabel gameNameLabel;
 
 //creating buttons - utbytt till metod
 //    JButton btn1 = new JButton("1"); JButton btn2 = new JButton("2");
@@ -27,10 +29,9 @@ public class GameLayout extends JFrame {
 
     public GameLayout(){
 
-        gameName = new JLabel("Game4By4");
-        namePanel = new JPanel(new BorderLayout());
-        buttonPanel = new JPanel(new GridLayout(4,4));
-        newGamePanel = new JPanel(new GridLayout(1,2));
+        gameNameLabel = new JLabel("Game4By4");
+        namePanel = new JPanel(new GridLayout(1,2));
+        buttonPanel = new JPanel(new GridLayout(rows, columns));
         gamePanel = new JPanel(new BorderLayout());
 
         namePanel.add(gameName);
@@ -50,8 +51,8 @@ public class GameLayout extends JFrame {
 
         gamePanel.add(namePanel, BorderLayout.NORTH);
         gamePanel.add(buttonPanel, BorderLayout.CENTER);
-        gamePanel.add(newGamePanel, BorderLayout.SOUTH);
 
+        this.add(namePanel);
         this.add(gamePanel);
 
 //        setFocusable(false);
