@@ -1,8 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class GameLayout extends JFrame {
+    TileGenerator tg = new TileGenerator();
+    List<String> listInCorrectOrder = new ArrayList<>();
+    List<Tiles> listOfShuffledTiles = new ArrayList<>();
 
     private int rows = 4;
     private int columns = 4;
@@ -19,6 +24,8 @@ public class GameLayout extends JFrame {
 
     public GameLayout(){
 
+
+
         gameNameLabel = new JLabel("Game4By4");
         namePanel = new JPanel(new BorderLayout());
         buttonPanel = new JPanel(new GridLayout(rows, columns));
@@ -26,16 +33,22 @@ public class GameLayout extends JFrame {
         gamePanel.setSize(buttonWidthAndHeight*rows,buttonWidthAndHeight*columns);
         gameNameLabel = new JLabel("Rubrik");
 
-        namePanel.add(gameNameLabel);
-        namePanel.add(newGameBtn);
+        newGameBtn.addActionListener(l -> {
+            buttonPanel.removeAll();
+            addButtonsToBoard();
+            repaint();
+            revalidate();
 
-        createButtons();
-        buttonPanel.add(btnEmpty); //highest z-value of all buttons, added last, int clickedButtonIndex = getComponentZOrder(button)
+        });
+
+        addButtonsToBoard();
+
+        namePanel.add(gameNameLabel, BorderLayout.CENTER);
+        namePanel.add(newGameBtn, BorderLayout.WEST);
 
         gamePanel.add(namePanel, BorderLayout.NORTH);
         gamePanel.add(buttonPanel, BorderLayout.CENTER);
 
-        this.add(namePanel);
         this.add(gamePanel);
 
 //        setFocusable(false);
@@ -45,16 +58,17 @@ public class GameLayout extends JFrame {
         pack();
     }
 
-    private void createButtons() {
-        ButtonAction ba = new ButtonAction();
-        int numCols = 4;
-        int numRows = 4;
-        for (int i = 1; i < numRows * numCols; i++) {
-            JButton button = new JButton(String.valueOf(i));
-            button.addActionListener(ba);
-            buttonPanel.add(button);
+    public void addButtonsToBoard(){
+        listInCorrectOrder.clear();
+        listOfShuffledTiles.clear();
+        for (int i = 1; i <rows*columns ; i++) {
+            listInCorrectOrder.add(String.valueOf(i));
+        }
+        listInCorrectOrder.add("");
+        listOfShuffledTiles = tg.createListOfTiles(listInCorrectOrder, rows, columns);
+
+        for(Tiles tiles: listOfShuffledTiles) {
+            buttonPanel.add(tiles);
         }
     }
-
-
 }

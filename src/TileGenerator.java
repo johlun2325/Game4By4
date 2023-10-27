@@ -8,6 +8,7 @@ public class TileGenerator {
     }
 
     public List<Tiles> createListOfTiles (List<String> listOfTileNames, int rows, int columns) {
+        ButtonAction ba = new ButtonAction();
         List<Tiles> listToReturn = new ArrayList<>();
         Collections.shuffle(listOfTileNames);
         int counter = 0;
