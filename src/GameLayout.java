@@ -64,7 +64,7 @@ public class GameLayout extends JFrame {
         for (int i = 1; i <rows*columns ; i++) {
             listInCorrectOrder.add(String.valueOf(i));
         }
-        listInCorrectOrder.add("");
+
         listOfShuffledTiles = tg.createListOfTiles(listInCorrectOrder, rows, columns);
 
         for(Tiles tiles: listOfShuffledTiles) {

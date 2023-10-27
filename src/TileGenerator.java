@@ -11,6 +11,7 @@ public class TileGenerator {
         ButtonAction ba = new ButtonAction();
         List<Tiles> listToReturn = new ArrayList<>();
         Collections.shuffle(listOfTileNames);
+        listOfTileNames.add("");
         int counter = 0;
         for (int c = 1; c <=columns ; c++) {
             for (int r = 1; r <=rows ; r++) {
