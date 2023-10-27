@@ -1,24 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-
-
-/*TO-DO//
-* Panel för hela spelytan, Border Layout nord center syd.*
-* Panel för north del - för Spelnamn-label *
-* Panel för center del, (spelytan med knappar) - grid *
-* Panel för south del - (new game knapp och label med rubrik) - grid
-* Skapa knappar 1-15 samt new game *
-* Skapa label "Rubrik på spel" *
-* initiera element med layouts och text.*
-*
-* setSize
-* setResizable = false
-* ram?
-* set action listeners på knappar
-* ny klass för hantering av actionPerformed
-*  */
-
 
 
 public class GameLayout extends JFrame {
