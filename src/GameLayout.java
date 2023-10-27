@@ -6,7 +6,8 @@ public class GameLayout extends JFrame {
 
     private int rows = 4;
     private int columns = 4;
-    private int buttonSize = 80;
+    private int buttonWidthAndHeight = 70;
+
 
     JPanel gamePanel; // som grund för hela spelytan
     JPanel namePanel; // för rubrik
@@ -19,9 +20,10 @@ public class GameLayout extends JFrame {
     public GameLayout(){
 
         gameNameLabel = new JLabel("Game4By4");
-        namePanel = new JPanel(new GridLayout(1,2));
+        namePanel = new JPanel(new BorderLayout());
         buttonPanel = new JPanel(new GridLayout(rows, columns));
         gamePanel = new JPanel(new BorderLayout());
+        gamePanel.setSize(buttonWidthAndHeight*rows,buttonWidthAndHeight*columns);
         gameNameLabel = new JLabel("Rubrik");
 
         namePanel.add(gameNameLabel);
