@@ -11,17 +11,19 @@ public class GameLayout extends JFrame implements ActionListener {
     List<String> listInCorrectOrder = new ArrayList<>();
     List<Tiles> listOfShuffledTiles = new ArrayList<>();
 
-    private int rows = 4;
-    private int columns = 4;
+    private int nrOfRows = 4;
+    private int nrOfColumns = 4;
     private int buttonWidthAndHeight = 70;
 
     JPanel gamePanel; // som grund för hela spelytan
     JPanel namePanel; // för rubrik
     JPanel buttonPanel; // att placera alla knappar på
+    JPanel victoryPanel;
     JLabel gameNameLabel;
-
     JButton newGameBtn = new JButton("New Game");
     JButton cheatButton = new JButton("Cheat");
+    JLabel victoryLabel;
+    CardLayout cardLayout;
 
     public GameLayout() {
 
@@ -30,21 +32,38 @@ public class GameLayout extends JFrame implements ActionListener {
         }
         listInCorrectOrder.add("");
 
+        cardLayout = new CardLayout();
         gameNameLabel = new JLabel("Game4By4");
+        victoryLabel = new JLabel("Victory!");
+        cardPanel = new JPanel(cardLayout);
+        victoryPanel = new JPanel(new BorderLayout());
         namePanel = new JPanel(new BorderLayout());
-        buttonPanel = new JPanel(new GridLayout(rows, columns));
+        buttonPanel = new JPanel(new GridLayout(nrOfRows, nrOfColumns));
         gamePanel = new JPanel(new BorderLayout());
         gamePanel.setSize(buttonWidthAndHeight * nrOfRows, buttonWidthAndHeight * nrOfColumns);
-        gameNameLabel = new JLabel("Rubrik");
+
 
         newGameBtn.addActionListener(l -> {
             buttonPanel.removeAll();
-            addButtonsToBoard();
+            addButtonsToBoard(false);
+            cardLayout.show(cardPanel, "buttons");
             repaint();
             revalidate();
         });
 
-        addButtonsToBoard();
+        cheatButton.addActionListener(l -> {
+            buttonPanel.removeAll();
+            addButtonsToBoard(true);
+            repaint();
+            revalidate();
+        });
+
+        addButtonsToBoard(false);
+
+        cardPanel.add("victory", victoryPanel);
+        cardPanel.add("buttons", buttonPanel);
+
+        victoryPanel.add(victoryLabel, BorderLayout.CENTER);
 
         namePanel.add(gameNameLabel, BorderLayout.CENTER);
         namePanel.add(newGameBtn, BorderLayout.WEST);
@@ -55,7 +74,6 @@ public class GameLayout extends JFrame implements ActionListener {
 
         this.add(gamePanel);
 
-//        setFocusable(false);
         setTitle("Game4By4");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
@@ -70,10 +88,56 @@ public class GameLayout extends JFrame implements ActionListener {
             listToBeShuffled.add(String.valueOf(i));
         }
 
-        listOfShuffledTiles = tg.createListOfTiles(listInCorrectOrder, rows, columns);
+        listOfShuffledTiles = tg.createListOfTiles(listToBeShuffled, nrOfRows, nrOfColumns, cheat);
 
-        for(Tiles tiles: listOfShuffledTiles) {
+        for (Tiles tiles : listOfShuffledTiles) {
+            tiles.addActionListener(this);
             buttonPanel.add(tiles);
         }
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Tiles clickedTile = (Tiles) e.getSource();
+        for (Tiles tile : this.listOfShuffledTiles) {
+
+            if (!tile.getText().isEmpty()) {
+                continue;
+            }
+
+            if (isAdjacent(clickedTile, tile)) {
+                String temp = clickedTile.getText();
+                clickedTile.setText(tile.getText());
+                tile.setText(temp);
+            }
+        }
+        checkForVictory();
+    }
+
+    public boolean isAdjacent(Tiles clickedTile, Tiles emptyTile) {
+        int rowDiff = Math.abs(clickedTile.getRowNr() - emptyTile.getRowNr());
+        int columnDiff = Math.abs(clickedTile.getColumnNr() - emptyTile.getColumnNr());
+
+        return (rowDiff == 1 && columnDiff == 0)
+                || (columnDiff == 1 && rowDiff == 0);
+    }
+
+    public void checkForVictory() {
+
+        List<String> currentList = new ArrayList<>();
+        for (Tiles tile : this.listOfShuffledTiles) {
+
+            currentList.add(tile.getText());
+        }
+
+        if (currentList.equals(listInCorrectOrder)) {
+
+            cardLayout.show(cardPanel, "victory");
+            repaint();
+            revalidate();
+
+        }
+
+    }
 }
+
