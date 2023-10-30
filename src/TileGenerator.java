@@ -22,8 +22,6 @@ public class TileGenerator {
                 counter++;
             }
         }
-
-
         return listToReturn;
     }
 }

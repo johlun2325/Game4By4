@@ -23,16 +23,21 @@ public class GameLayout extends JFrame implements ActionListener {
 
     JButton btnEmpty = new JButton(); //"" eller ingenting?
     JButton newGameBtn = new JButton("New Game");
+    JButton cheatButton = new JButton("Cheat");
 
-    public GameLayout(){
+    public GameLayout() {
 
+        for (int i = 1; i < nrOfRows * nrOfColumns; i++) {
+            listInCorrectOrder.add(String.valueOf(i));
+        }
+        listInCorrectOrder.add("");
 
 
         gameNameLabel = new JLabel("Game4By4");
         namePanel = new JPanel(new BorderLayout());
         buttonPanel = new JPanel(new GridLayout(rows, columns));
         gamePanel = new JPanel(new BorderLayout());
-        gamePanel.setSize(buttonWidthAndHeight*rows,buttonWidthAndHeight*columns);
+        gamePanel.setSize(buttonWidthAndHeight * nrOfRows, buttonWidthAndHeight * nrOfColumns);
         gameNameLabel = new JLabel("Rubrik");
 
         newGameBtn.addActionListener(l -> {
@@ -47,6 +52,7 @@ public class GameLayout extends JFrame implements ActionListener {
 
         namePanel.add(gameNameLabel, BorderLayout.CENTER);
         namePanel.add(newGameBtn, BorderLayout.WEST);
+        namePanel.add(cheatButton, BorderLayout.EAST);
 
         gamePanel.add(namePanel, BorderLayout.NORTH);
         gamePanel.add(buttonPanel, BorderLayout.CENTER);
@@ -60,11 +66,12 @@ public class GameLayout extends JFrame implements ActionListener {
         pack();
     }
 
-    public void addButtonsToBoard(){
-        listInCorrectOrder.clear();
+    public void addButtonsToBoard(boolean cheat) {
+        List<String> listToBeShuffled = new ArrayList<>();
         listOfShuffledTiles.clear();
-        for (int i = 1; i <rows*columns ; i++) {
-            listInCorrectOrder.add(String.valueOf(i));
+
+        for (int i = 1; i < nrOfRows * nrOfColumns; i++) {
+            listToBeShuffled.add(String.valueOf(i));
         }
 
         listOfShuffledTiles = tg.createListOfTiles(listInCorrectOrder, rows, columns);
