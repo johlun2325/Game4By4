@@ -1,10 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class GameLayout extends JFrame {
+public class GameLayout extends JFrame implements ActionListener {
     TileGenerator tg = new TileGenerator();
     List<String> listInCorrectOrder = new ArrayList<>();
     List<Tiles> listOfShuffledTiles = new ArrayList<>();
