@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.awt.Font.BOLD;
+
 
 public class GameLayout extends JFrame implements ActionListener {
     TileGenerator tg = new TileGenerator();
@@ -13,7 +15,7 @@ public class GameLayout extends JFrame implements ActionListener {
 
     private final int nrOfRows = 4;
     private final int nrOfColumns = 4;
-    private final int buttonWidthAndHeight = 150;
+
 
     JPanel gamePanel;
     JPanel namePanel;
@@ -37,16 +39,17 @@ public class GameLayout extends JFrame implements ActionListener {
         listInCorrectOrder.add("");
 
         cardLayout = new CardLayout();
-
         gameNameLabel = new JLabel("Game4By4");
         victoryLabel = new JLabel("Victory!");
+        Font victoryFont = new Font("Helvetica",BOLD,126);
+        victoryLabel.setFont(victoryFont);
 
         cardPanel = new JPanel(cardLayout);
         victoryPanel = new JPanel(new BorderLayout());
         namePanel = new JPanel(new BorderLayout());
         buttonPanel = new JPanel(new GridLayout(nrOfRows, nrOfColumns));
         gamePanel = new JPanel(new BorderLayout());
-        gamePanel.setSize(buttonWidthAndHeight * nrOfRows, buttonWidthAndHeight * nrOfColumns);
+
 
         newGameBtn = new JButton("New Game");
         newGameBtn.addActionListener(l -> {
@@ -84,6 +87,7 @@ public class GameLayout extends JFrame implements ActionListener {
         this.add(gamePanel);
         setTitle("Game4By4");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setResizable(false);
         setVisible(true);
         pack();
     }
