@@ -39,7 +39,9 @@ public class GameLayout extends JFrame implements ActionListener {
         listInCorrectOrder.add("");
 
         cardLayout = new CardLayout();
-        gameNameLabel = new JLabel("Game4By4");
+        gameNameLabel = new JLabel("Game Of 15");
+        Font gameNameFont = new Font("Arial",BOLD,36);
+        gameNameLabel.setFont(gameNameFont);
         victoryLabel = new JLabel("Victory!");
         Font victoryFont = new Font("Helvetica",BOLD,126);
         victoryLabel.setFont(victoryFont);
