@@ -48,7 +48,7 @@ public class GameLayout extends JFrame implements ActionListener {
         gamePanel = new JPanel(new BorderLayout());
         gamePanel.setSize(buttonWidthAndHeight * nrOfRows, buttonWidthAndHeight * nrOfColumns);
 
-
+        newGameBtn = new JButton("New Game");
         newGameBtn.addActionListener(l -> {
             buttonPanel.removeAll();
             addButtonsToBoard(false);
@@ -57,6 +57,7 @@ public class GameLayout extends JFrame implements ActionListener {
             revalidate();
         });
 
+        cheatButton = new JButton("Cheat");
         cheatButton.addActionListener(l -> {
             buttonPanel.removeAll();
             addButtonsToBoard(true);

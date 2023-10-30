@@ -1,6 +1,4 @@
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Tiles extends JButton {
     private int rowNr;
@@ -19,12 +17,5 @@ public class Tiles extends JButton {
     public int getColumnNr() {
         return columnNr;
     }
-
-    public void setRowNr(int rowNr) {
-        this.rowNr = rowNr;
-    }
-
-    public void setColumnNr(int columnNr) {
-        this.columnNr = columnNr;
-    }
+    
 }
