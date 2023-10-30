@@ -15,13 +15,11 @@ public class GameLayout extends JFrame implements ActionListener {
     private int columns = 4;
     private int buttonWidthAndHeight = 70;
 
-
     JPanel gamePanel; // som grund för hela spelytan
     JPanel namePanel; // för rubrik
     JPanel buttonPanel; // att placera alla knappar på
     JLabel gameNameLabel;
 
-    JButton btnEmpty = new JButton(); //"" eller ingenting?
     JButton newGameBtn = new JButton("New Game");
     JButton cheatButton = new JButton("Cheat");
 
@@ -31,7 +29,6 @@ public class GameLayout extends JFrame implements ActionListener {
             listInCorrectOrder.add(String.valueOf(i));
         }
         listInCorrectOrder.add("");
-
 
         gameNameLabel = new JLabel("Game4By4");
         namePanel = new JPanel(new BorderLayout());
@@ -45,7 +42,6 @@ public class GameLayout extends JFrame implements ActionListener {
             addButtonsToBoard();
             repaint();
             revalidate();
-
         });
 
         addButtonsToBoard();
