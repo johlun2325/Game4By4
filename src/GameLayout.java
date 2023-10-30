@@ -17,6 +17,7 @@ public class GameLayout extends JFrame implements ActionListener {
 
     JPanel gamePanel; // som grund för hela spelytan
     JPanel namePanel; // för rubrik
+    JPanel cardPanel;
     JPanel buttonPanel; // att placera alla knappar på
     JPanel victoryPanel;
     JLabel gameNameLabel;
@@ -70,8 +71,9 @@ public class GameLayout extends JFrame implements ActionListener {
         namePanel.add(cheatButton, BorderLayout.EAST);
 
         gamePanel.add(namePanel, BorderLayout.NORTH);
-        gamePanel.add(buttonPanel, BorderLayout.CENTER);
+        gamePanel.add(cardPanel, BorderLayout.CENTER);
 
+        cardLayout.show(cardPanel, "buttons");
         this.add(gamePanel);
 
         setTitle("Game4By4");
