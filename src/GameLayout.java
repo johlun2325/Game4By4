@@ -8,6 +8,7 @@ import java.util.List;
 
 public class GameLayout extends JFrame implements ActionListener {
     TileGenerator tg = new TileGenerator();
+    GameLogic gl = new GameLogic();
     List<String> listInCorrectOrder = new ArrayList<>();
     List<Tiles> listOfShuffledTiles = new ArrayList<>();
 
@@ -15,26 +16,27 @@ public class GameLayout extends JFrame implements ActionListener {
     private final int nrOfColumns = 4;
     private final int buttonWidthAndHeight = 150;
 
-    JPanel gamePanel;
-    JPanel namePanel;
-    JPanel cardPanel;
-    JPanel buttonPanel;
-    JPanel victoryPanel;
+    public int getNrOfRows() {
+        return nrOfRows;
+    }
+    public int getNrOfColumns() {
+        return nrOfColumns;
+    }
 
-    JLabel gameNameLabel;
-    JLabel victoryLabel;
-
-    JButton newGameBtn;
-    JButton cheatButton;
+    JPanel gamePanel; JPanel namePanel; JPanel cardPanel;
+    JPanel buttonPanel; JPanel victoryPanel;
+    JLabel gameNameLabel; JLabel victoryLabel;
+    JButton newGameBtn; JButton cheatButton;
 
     CardLayout cardLayout;
 
     public GameLayout() {
+        GameLogic logic = new GameLogic();
 
-        for (int i = 1; i < nrOfRows * nrOfColumns; i++) {
-            listInCorrectOrder.add(String.valueOf(i));
-        }
-        listInCorrectOrder.add("");
+//        for (int i = 1; i < nrOfRows * nrOfColumns; i++) {
+//            listInCorrectOrder.add(String.valueOf(i));
+//        }
+//        listInCorrectOrder.add("");
 
         cardLayout = new CardLayout();
 
@@ -51,7 +53,7 @@ public class GameLayout extends JFrame implements ActionListener {
         newGameBtn = new JButton("New Game");
         newGameBtn.addActionListener(l -> {
             buttonPanel.removeAll();
-            addButtonsToBoard(false);
+            gl.addButtonsToBoard(this, this.nrOfRows, this.nrOfColumns, false);
             cardLayout.show(cardPanel, "buttons");
             repaint();
             revalidate();
@@ -60,12 +62,12 @@ public class GameLayout extends JFrame implements ActionListener {
         cheatButton = new JButton("Cheat");
         cheatButton.addActionListener(l -> {
             buttonPanel.removeAll();
-            addButtonsToBoard(true);
+            gl.addButtonsToBoard(this, this.getNrOfRows(), this.nrOfColumns, true);
             repaint();
             revalidate();
         });
 
-        addButtonsToBoard(false);
+       gl.addButtonsToBoard(this, this.nrOfRows, this.nrOfColumns, false);
 
         cardPanel.add("victory", victoryPanel);
         cardPanel.add("buttons", buttonPanel);
@@ -88,24 +90,25 @@ public class GameLayout extends JFrame implements ActionListener {
         pack();
     }
 
-    public void addButtonsToBoard(boolean cheat) {
-        List<String> listToBeShuffled = new ArrayList<>();
-        listOfShuffledTiles.clear();
-
-        for (int i = 1; i < nrOfRows * nrOfColumns; i++) {
-            listToBeShuffled.add(String.valueOf(i));
-        }
-
-        listOfShuffledTiles = tg.createListOfTiles(listToBeShuffled, nrOfRows, nrOfColumns, cheat);
-
-        for (Tiles tiles : listOfShuffledTiles) {
-            tiles.addActionListener(this);
-            buttonPanel.add(tiles);
-        }
-    }
+//    public void addButtonsToBoard(boolean cheat) {
+//        List<String> listToBeShuffled = new ArrayList<>();
+//        listOfShuffledTiles.clear();
+//
+//        for (int i = 1; i < nrOfRows * nrOfColumns; i++) {
+//            listToBeShuffled.add(String.valueOf(i));
+//        }
+//
+//        listOfShuffledTiles = tg.createListOfTiles(listToBeShuffled, nrOfRows, nrOfColumns, cheat);
+//
+//        for (Tiles tiles : listOfShuffledTiles) {
+//            tiles.addActionListener(this);
+//            buttonPanel.add(tiles);
+//        }
+//    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        GameLogic logic = new GameLogic(); //instans av gamelogic
         Tiles clickedTile = (Tiles) e.getSource();
         for (Tiles tile : this.listOfShuffledTiles) {
 
@@ -113,39 +116,46 @@ public class GameLayout extends JFrame implements ActionListener {
                 continue;
             }
 
-            if (isAdjacent(clickedTile, tile)) {
+            if (logic.isAdjacent(clickedTile, tile)) { //kallar på metod via gamelogic
                 String temp = clickedTile.getText();
                 clickedTile.setText(tile.getText());
                 tile.setText(temp);
             }
         }
-        checkForVictory();
+        logic.checkForVictory(this); //change to rungame later, argument gamelayout
     }
 
-    public boolean isAdjacent(Tiles clickedTile, Tiles emptyTile) {
-        int rowDiff = Math.abs(clickedTile.getRowNr() - emptyTile.getRowNr());
-        int columnDiff = Math.abs(clickedTile.getColumnNr() - emptyTile.getColumnNr());
-
-        return (rowDiff == 1 && columnDiff == 0)
-                || (columnDiff == 1 && rowDiff == 0);
-    }
-
-    public void checkForVictory() {
-
-        List<String> currentList = new ArrayList<>();
-        for (Tiles tile : this.listOfShuffledTiles) {
-
-            currentList.add(tile.getText());
+    public void initializeListWithCorrectValues(){
+        for (int i = 1; i < nrOfRows * nrOfColumns; i++) {
+            listInCorrectOrder.add(String.valueOf(i));
         }
-
-        if (currentList.equals(listInCorrectOrder)) {
-
-            cardLayout.show(cardPanel, "victory");
-            repaint();
-            revalidate();
-
-        }
-
+        listInCorrectOrder.add("");
     }
+
+//    public boolean isAdjacent(Tiles clickedTile, Tiles emptyTile) {
+//        int rowDiff = Math.abs(clickedTile.getRowNr() - emptyTile.getRowNr());
+//        int columnDiff = Math.abs(clickedTile.getColumnNr() - emptyTile.getColumnNr());
+//
+//        return (rowDiff == 1 && columnDiff == 0)
+//                || (columnDiff == 1 && rowDiff == 0);
+//    }
+
+//    public void checkForVictory() {
+//
+//        List<String> currentList = new ArrayList<>();
+//        for (Tiles tile : this.listOfShuffledTiles) {
+//
+//            currentList.add(tile.getText());
+//        }
+//
+//        if (currentList.equals(listInCorrectOrder)) {
+//
+//            cardLayout.show(cardPanel, "victory");
+//            repaint();
+//            revalidate();
+//
+//        }
+//
+//    }
 }
 
