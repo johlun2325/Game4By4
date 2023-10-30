@@ -11,19 +11,22 @@ public class GameLayout extends JFrame implements ActionListener {
     List<String> listInCorrectOrder = new ArrayList<>();
     List<Tiles> listOfShuffledTiles = new ArrayList<>();
 
-    private int nrOfRows = 4;
-    private int nrOfColumns = 4;
-    private int buttonWidthAndHeight = 70;
+    private final int nrOfRows = 4;
+    private final int nrOfColumns = 4;
+    private final int buttonWidthAndHeight = 150;
 
-    JPanel gamePanel; // som grund för hela spelytan
-    JPanel namePanel; // för rubrik
+    JPanel gamePanel;
+    JPanel namePanel;
     JPanel cardPanel;
-    JPanel buttonPanel; // att placera alla knappar på
+    JPanel buttonPanel;
     JPanel victoryPanel;
+
     JLabel gameNameLabel;
-    JButton newGameBtn = new JButton("New Game");
-    JButton cheatButton = new JButton("Cheat");
     JLabel victoryLabel;
+
+    JButton newGameBtn;
+    JButton cheatButton;
+
     CardLayout cardLayout;
 
     public GameLayout() {
@@ -34,8 +37,10 @@ public class GameLayout extends JFrame implements ActionListener {
         listInCorrectOrder.add("");
 
         cardLayout = new CardLayout();
+
         gameNameLabel = new JLabel("Game4By4");
         victoryLabel = new JLabel("Victory!");
+
         cardPanel = new JPanel(cardLayout);
         victoryPanel = new JPanel(new BorderLayout());
         namePanel = new JPanel(new BorderLayout());
@@ -74,8 +79,8 @@ public class GameLayout extends JFrame implements ActionListener {
         gamePanel.add(cardPanel, BorderLayout.CENTER);
 
         cardLayout.show(cardPanel, "buttons");
-        this.add(gamePanel);
 
+        this.add(gamePanel);
         setTitle("Game4By4");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);

@@ -6,10 +6,6 @@ public class Tiles extends JButton {
     private int rowNr;
     private int columnNr;
 
-    public Tiles() {
-
-    }
-
     public Tiles(String text, int rowNr, int columnNr) {
         super(text);
         this.rowNr = rowNr;
