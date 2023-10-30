@@ -1,12 +1,10 @@
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import static java.awt.Font.BOLD;
+
 
 
 public class Game extends JFrame implements ActionListener {
@@ -34,7 +32,7 @@ public class Game extends JFrame implements ActionListener {
     JPanel cardPanel; JPanel buttonPanel;
     JPanel victoryPanel;
 
-    JLabel gameNameLabel; JLabel victoryLabel;
+    JLabel victoryLabel;
 
     JButton newGameBtn; JButton cheatButton;
 
