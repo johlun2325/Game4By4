@@ -13,6 +13,8 @@ public class Game extends JFrame implements ActionListener {
     TileGenerator tg = new TileGenerator();
     GameLogic logic = new GameLogic();
 
+    GameSounds gameSounds = new GameSounds();
+
     protected List<String> listInCorrectOrder = new ArrayList<>();
     protected List<Tiles> listOfShuffledTiles = new ArrayList<>();
 
@@ -121,6 +123,8 @@ public class Game extends JFrame implements ActionListener {
                 String temp = clickedTile.getText();
                 clickedTile.setText(tile.getText());
                 tile.setText(temp);
+                gameSounds.playTileSound();
+
             }
 
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 public class GameLogic {
     JFrame jf = new JFrame();
+    GameSounds gameSounds = new GameSounds();
 
     public void initializeListWithCorrectValues(Game gameLayout) {
         for (int i = 1; i < gameLayout.getNrOfRows() * gameLayout.getNrOfColumns(); i++) {
@@ -47,6 +48,7 @@ public class GameLogic {
 
         if (currentList.equals(gameLayout.listInCorrectOrder)) {
             gameLayout.cardLayout.show(gameLayout.cardPanel, "victory");
+            gameSounds.playVictorySound();
             jf.repaint();
             jf.revalidate();
         }

@@ -8,14 +8,27 @@ public class GameSounds {
 
     public void playVictorySound() {
         try {
-            URL source = GameSounds.class.getResource("src/winsound.wav");
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(source);
+            URL url = GameSounds.class.getResource("winsound.wav");
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
             Clip victoryClip = AudioSystem.getClip();
             victoryClip.open(audioInputStream);
             victoryClip.start();
 
 
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException | NullPointerException e) {
+            e.printStackTrace();
+        }
+    }
+    public void playTileSound() {
+        try {
+            URL url = GameSounds.class.getResource("tileMoveSound.wav");
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
+            Clip victoryClip = AudioSystem.getClip();
+            victoryClip.open(audioInputStream);
+            victoryClip.start();
+
+
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException | NullPointerException e) {
             e.printStackTrace();
         }
     }
