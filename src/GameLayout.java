@@ -33,11 +33,14 @@ public class GameLayout extends JFrame implements ActionListener {
     public GameLayout() {
         GameLogic logic = new GameLogic();
 
+        initializeListWithCorrectValues();
 //        for (int i = 1; i < nrOfRows * nrOfColumns; i++) {
 //            listInCorrectOrder.add(String.valueOf(i));
 //        }
 //        listInCorrectOrder.add("");
 
+
+        //initialize elements
         cardLayout = new CardLayout();
 
         gameNameLabel = new JLabel("Game4By4");
@@ -50,25 +53,32 @@ public class GameLayout extends JFrame implements ActionListener {
         gamePanel = new JPanel(new BorderLayout());
         gamePanel.setSize(buttonWidthAndHeight * nrOfRows, buttonWidthAndHeight * nrOfColumns);
 
+
+        //initialize new game button and it's actionPerformed method
         newGameBtn = new JButton("New Game");
         newGameBtn.addActionListener(l -> {
             buttonPanel.removeAll();
-            gl.addButtonsToBoard(this, this.nrOfRows, this.nrOfColumns, false);
+            logic.addButtonsToBoard(this, this.nrOfRows, this.nrOfColumns, false);
             cardLayout.show(cardPanel, "buttons");
             repaint();
             revalidate();
         });
 
+        //initialize cheat button and it's actionPerformed method
+
         cheatButton = new JButton("Cheat");
         cheatButton.addActionListener(l -> {
             buttonPanel.removeAll();
-            gl.addButtonsToBoard(this, this.getNrOfRows(), this.nrOfColumns, true);
+            logic.addButtonsToBoard(this, this.getNrOfRows(), this.nrOfColumns, true);
             repaint();
             revalidate();
         });
 
-       gl.addButtonsToBoard(this, this.nrOfRows, this.nrOfColumns, false);
+        //adding buttons to board for first game
+        logic.addButtonsToBoard(this, this.getNrOfRows(), this.getNrOfColumns(), false);
 
+
+        //adding elements to each other
         cardPanel.add("victory", victoryPanel);
         cardPanel.add("buttons", buttonPanel);
 
@@ -81,8 +91,10 @@ public class GameLayout extends JFrame implements ActionListener {
         gamePanel.add(namePanel, BorderLayout.NORTH);
         gamePanel.add(cardPanel, BorderLayout.CENTER);
 
+        //setting what cardLayout to show at the beginning
         cardLayout.show(cardPanel, "buttons");
 
+        //standard settings and adding gamePanel to frame
         this.add(gamePanel);
         setTitle("Game4By4");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -106,6 +118,8 @@ public class GameLayout extends JFrame implements ActionListener {
 //        }
 //    }
 
+
+    //actionPerformed method for game buttons
     @Override
     public void actionPerformed(ActionEvent e) {
         GameLogic logic = new GameLogic(); //instans av gamelogic
@@ -125,6 +139,8 @@ public class GameLayout extends JFrame implements ActionListener {
         logic.checkForVictory(this); //change to rungame later, argument gamelayout
     }
 
+
+    //method to initialize the list that contains the correct values
     public void initializeListWithCorrectValues(){
         for (int i = 1; i < nrOfRows * nrOfColumns; i++) {
             listInCorrectOrder.add(String.valueOf(i));
