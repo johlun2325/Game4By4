@@ -4,7 +4,16 @@ import java.util.List;
 
 public class GameLogic {
     JFrame jf = new JFrame();
-    public void addButtonsToBoard(GameLayout gameLayout, int nrOfRows, int nrOfColumns, boolean cheat) {
+
+    public void initializeListWithCorrectValues(Game gameLayout) {
+        for (int i = 1; i < gameLayout.getNrOfRows() * gameLayout.getNrOfColumns(); i++) {
+            gameLayout.listInCorrectOrder.add(String.valueOf(i));
+        }
+        gameLayout.listInCorrectOrder.add("");
+        System.out.println("initiering komplett");
+    }
+
+    public void addButtonsToBoard(Game gameLayout, int nrOfRows, int nrOfColumns, boolean cheat) {
         List<String> listToBeShuffled = new ArrayList<>();
 
         gameLayout.listOfShuffledTiles.clear();
@@ -29,7 +38,7 @@ public class GameLogic {
                 || (columnDiff == 1 && rowDiff == 0);
     }
 
-    public void checkForVictory(GameLayout gameLayout) {
+    public void checkForVictory(Game gameLayout) {
 
         List<String> currentList = new ArrayList<>();
         for (Tiles tile : gameLayout.listOfShuffledTiles) {
