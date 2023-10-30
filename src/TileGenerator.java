@@ -1,3 +1,4 @@
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,6 +23,7 @@ public class TileGenerator {
                 Font buttonFont = new Font("Arial",BOLD,26);
                 Tiles tile = new Tiles((listOfTileNames.get(counter)), r, c);
                 tile.setFont(buttonFont);
+                tile.setBorder(new LineBorder(Color.gray));
                 tile.setMargin(new Insets(0,0,0,0));
                 tile.setPreferredSize(new Dimension(100,100));
                 listToReturn.add(tile);

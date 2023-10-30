@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,10 +38,10 @@ public class Game extends JFrame implements ActionListener {
 
     CardLayout cardLayout;
 
-    public GameLayout() {
+
 
     public Game() {
-        setTitle("Game4By4");
+        setTitle("Game of 15");
         logic.initializeListWithCorrectValues(this);
 
         this.initializeComponents();
@@ -67,6 +69,7 @@ public class Game extends JFrame implements ActionListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.addComponents();
         this.add(gamePanel);
+        this.setResizable(false);
         this.setVisible(true);
         this.pack();
     }
@@ -74,15 +77,16 @@ public class Game extends JFrame implements ActionListener {
     private void initializeComponents() {
         cardLayout = new CardLayout();
 
-        gameNameLabel = new JLabel("Game4By4");
+
         victoryLabel = new JLabel("Victory!");
+        Font victoryFont = new Font("Helvetica", Font.ITALIC,108);
+        victoryLabel.setFont(victoryFont);
 
         cardPanel = new JPanel(cardLayout);
         victoryPanel = new JPanel(new BorderLayout());
         namePanel = new JPanel(new BorderLayout());
         buttonPanel = new JPanel(new GridLayout(nrOfRows, nrOfColumns));
         gamePanel = new JPanel(new BorderLayout());
-        gamePanel.setSize(buttonWidthAndHeight * nrOfRows, buttonWidthAndHeight * nrOfColumns);
 
     }
 
@@ -90,9 +94,9 @@ public class Game extends JFrame implements ActionListener {
         cardPanel.add("victory", victoryPanel);
         cardPanel.add("buttons", buttonPanel);
 
-        victoryPanel.add(victoryLabel, BorderLayout.CENTER);
+        victoryPanel.add(victoryLabel);
 
-        namePanel.add(gameNameLabel, BorderLayout.CENTER);
+
         namePanel.add(newGameBtn, BorderLayout.WEST);
         namePanel.add(cheatButton, BorderLayout.EAST);
 
@@ -118,7 +122,10 @@ public class Game extends JFrame implements ActionListener {
                 clickedTile.setText(tile.getText());
                 tile.setText(temp);
             }
+
+
         }
+
         logic.checkForVictory(this); //change to rungame later, argument gamelayout
     }
 
