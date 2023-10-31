@@ -96,7 +96,6 @@ public class Game extends JFrame implements ActionListener {
 
         victoryPanel.add(victoryLabel);
 
-
         namePanel.add(newGameBtn, BorderLayout.WEST);
         namePanel.add(cheatButton, BorderLayout.EAST);
 

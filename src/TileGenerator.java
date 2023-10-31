@@ -1,5 +1,9 @@
+import com.sun.source.tree.NewArrayTree;
+
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,6 +30,17 @@ public class TileGenerator {
                 tile.setBorder(new LineBorder(Color.gray));
                 tile.setMargin(new Insets(0,0,0,0));
                 tile.setPreferredSize(new Dimension(100,100));
+                tile.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                        tile.setBorder(new LineBorder(Color.blue,1));
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+                        tile.setBorder(new LineBorder(Color.gray));
+                    }
+                });
                 listToReturn.add(tile);
                 counter++;
             }
