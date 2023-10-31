@@ -42,13 +42,8 @@ public class Game extends JFrame implements ActionListener {
 
         logic.addTilesToBoard(this, getNrOfRows(), getNrOfColumns(), false);
 
-        newGameButton.addActionListener(l -> {
-            startNewGame(false);
-        });
-
-        cheatButton.addActionListener(l -> {
-            startNewGame(true);
-        });
+        newGameButton.addActionListener(l -> startNewGame(false));
+        cheatButton.addActionListener(l -> startNewGame(true));
 
         this.addComponents();
         this.setUp();
