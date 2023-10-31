@@ -13,6 +13,7 @@ public class GameSounds {
             Clip victoryClip = AudioSystem.getClip();
             victoryClip.open(audioInputStream);
             victoryClip.start();
+            audioInputStream.close();
 
 
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException | NullPointerException e) {
@@ -26,6 +27,7 @@ public class GameSounds {
             Clip victoryClip = AudioSystem.getClip();
             victoryClip.open(audioInputStream);
             victoryClip.start();
+            audioInputStream.close();
 
 
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException | NullPointerException e) {
