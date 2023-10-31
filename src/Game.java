@@ -38,8 +38,6 @@ public class Game extends JFrame implements ActionListener {
 
     CardLayout cardLayout;
 
-
-
     public Game() {
         setTitle("Game of 15");
         logic.initializeListWithCorrectValues(this);
@@ -76,7 +74,6 @@ public class Game extends JFrame implements ActionListener {
         this.pack();
     }
 
-
     private void initializeComponents() {
         cardLayout = new CardLayout();
 
@@ -103,10 +100,8 @@ public class Game extends JFrame implements ActionListener {
         gamePanel.add(namePanel, BorderLayout.NORTH);
         gamePanel.add(cardPanel, BorderLayout.CENTER);
 
-        //setting what cardLayout to show at the beginning
         cardLayout.show(cardPanel, "buttons");
         this.add(gamePanel);
-
     }
 
     @Override
@@ -118,20 +113,15 @@ public class Game extends JFrame implements ActionListener {
                 continue;
             }
 
-            if (logic.isAdjacent(clickedTile, tile)) { //kallar på metod via gamelogic
+            if (logic.isAdjacent(clickedTile, tile)) {
                 String temp = clickedTile.getText();
                 clickedTile.setText(tile.getText());
                 tile.setText(temp);
                 gameSounds.playTileSound();
 
             }
-
-
         }
-
-        logic.checkForVictory(this); //change to rungame later, argument gamelayout
+        logic.checkForVictory(this);
     }
-
-
 }
 
