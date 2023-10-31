@@ -5,8 +5,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class Game extends JFrame implements ActionListener {
     TileGenerator tileGenerator = new TileGenerator();
     GameLogic logic = new GameLogic();
@@ -97,6 +95,14 @@ public class Game extends JFrame implements ActionListener {
         this.add(gamePanel);
     }
 
+    private void startNewGame(boolean cheat) {
+        buttonPanel.removeAll();
+        logic.addTilesToBoard(this, this.nrOfRows, this.nrOfColumns,cheat);
+        cardLayout.show(cardPanel, "buttons");
+        repaint();
+        revalidate();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Tiles clickedTile = (Tiles) e.getSource();
@@ -117,13 +123,6 @@ public class Game extends JFrame implements ActionListener {
         logic.checkForVictory(this);
     }
 
-    private void startNewGame(boolean cheat) {
-        buttonPanel.removeAll();
-        logic.addTilesToBoard(this, this.nrOfRows, this.nrOfColumns,cheat);
-        cardLayout.show(cardPanel, "buttons");
-        repaint();
-        revalidate();
-    }
 
 
 }
