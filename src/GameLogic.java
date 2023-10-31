@@ -6,23 +6,20 @@ public class GameLogic {
     JFrame jf = new JFrame();
     GameSounds gameSounds = new GameSounds();
 
-    public void initializeListWithCorrectValues(Game gameLayout) {
-        for (int i = 1; i < gameLayout.getNrOfRows() * gameLayout.getNrOfColumns(); i++) {
-            gameLayout.listInCorrectOrder.add(String.valueOf(i));
-        }
+    public void initializeListWithNumbersInCorrectOrder(Game gameLayout) {
+        gameLayout.listInCorrectOrder = generateNumberListBasedOnRowsAndColumns(gameLayout.getNrOfRows(), gameLayout.getNrOfColumns());
         gameLayout.listInCorrectOrder.add("");
-        System.out.println("initiering komplett");
+
+
     }
 
-    public void addButtonsToBoard(Game gameLayout, int nrOfRows, int nrOfColumns, boolean cheat) {
-        List<String> listToBeShuffled = new ArrayList<>();
+    public void addTilesToBoard(Game gameLayout, int nrOfRows, int nrOfColumns, boolean cheat) {
+        List<String> listToBeShuffled;
 
         gameLayout.listOfShuffledTiles.clear();
 
-        for (int i = 1; i < nrOfRows * nrOfColumns; i++) {
-            listToBeShuffled.add(String.valueOf(i));
-        }
-        //eller instans av tg direkt i metod? Vad är snyggast?
+        listToBeShuffled = generateNumberListBasedOnRowsAndColumns(nrOfRows, nrOfColumns);
+
         gameLayout.listOfShuffledTiles = gameLayout.tg.createListOfTiles(listToBeShuffled, nrOfRows, nrOfColumns, cheat);
 
         for (Tiles tiles : gameLayout.listOfShuffledTiles) {
@@ -52,5 +49,15 @@ public class GameLogic {
             jf.repaint();
             jf.revalidate();
         }
+    }
+
+    public List<String> generateNumberListBasedOnRowsAndColumns(int rows, int columns) {
+        List<String> listToReturn = new ArrayList<>();
+
+        for (int i = 1; i < rows * columns; i++) {
+            listToReturn.add(String.valueOf(i));
+
+        }
+        return listToReturn;
     }
 }
