@@ -1,5 +1,3 @@
-import com.sun.source.tree.NewArrayTree;
-
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -11,6 +9,8 @@ import java.util.List;
 import static java.awt.Font.BOLD;
 
 public class TileGenerator {
+
+    GameLogic logic = new GameLogic();
 
     public TileGenerator() {
     }
@@ -31,6 +31,7 @@ public class TileGenerator {
                 tile.setMargin(new Insets(0,0,0,0));
                 tile.setPreferredSize(new Dimension(100,100));
                 tile.addMouseListener(new MouseAdapter() {
+
                     @Override
                     public void mouseEntered(MouseEvent e) {
                         tile.setBorder(new LineBorder(Color.blue,1));
