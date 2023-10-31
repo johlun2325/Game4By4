@@ -65,14 +65,17 @@ public class Game extends JFrame implements ActionListener {
             revalidate();
         });
 
-
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.addComponents();
-        this.add(gamePanel);
+        this.setUp();
+    }
+
+    private void setUp(){
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setVisible(true);
         this.pack();
     }
+
 
     private void initializeComponents() {
         cardLayout = new CardLayout();
@@ -102,6 +105,7 @@ public class Game extends JFrame implements ActionListener {
 
         //setting what cardLayout to show at the beginning
         cardLayout.show(cardPanel, "buttons");
+        this.add(gamePanel);
 
     }
 
