@@ -77,7 +77,6 @@ public class Game extends JFrame implements ActionListener {
     private void initializeComponents() {
         cardLayout = new CardLayout();
 
-
         victoryLabel = new JLabel("Victory!");
         Font victoryFont = new Font("Helvetica", Font.ITALIC,108);
         victoryLabel.setFont(victoryFont);
@@ -87,7 +86,6 @@ public class Game extends JFrame implements ActionListener {
         namePanel = new JPanel(new BorderLayout());
         buttonPanel = new JPanel(new GridLayout(nrOfRows, nrOfColumns));
         gamePanel = new JPanel(new BorderLayout());
-
     }
 
     private void addComponents() {
