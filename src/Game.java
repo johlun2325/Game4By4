@@ -8,7 +8,7 @@ import java.util.List;
 
 
 public class Game extends JFrame implements ActionListener {
-    TileGenerator tg = new TileGenerator();
+    TileGenerator tileGenerator = new TileGenerator();
     GameLogic logic = new GameLogic();
 
     GameSounds gameSounds = new GameSounds();

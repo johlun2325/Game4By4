@@ -17,5 +17,7 @@ public class Tiles extends JButton {
     public int getColumnNr() {
         return columnNr;
     }
+
+
     
 }
