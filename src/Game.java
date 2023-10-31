@@ -42,27 +42,20 @@ public class Game extends JFrame implements ActionListener {
 
     public Game() {
         setTitle("Game of 15");
-        logic.initializeListWithCorrectValues(this);
+        logic.initializeListWithNumbersInCorrectOrder(this);
 
         this.initializeComponents();
 
-        logic.addButtonsToBoard(this, getNrOfRows(), getNrOfColumns(), false);
+        logic.addTilesToBoard(this, getNrOfRows(), getNrOfColumns(), false);
 
         newGameBtn = new JButton("New Game");
         newGameBtn.addActionListener(l -> {
-            buttonPanel.removeAll();
-            logic.addButtonsToBoard(this, this.nrOfRows, this.nrOfColumns, false);
-            cardLayout.show(cardPanel, "buttons");
-            repaint();
-            revalidate();
+            startNewGame(false);
         });
 
         cheatButton = new JButton("Cheat");
         cheatButton.addActionListener(l -> {
-            buttonPanel.removeAll();
-            logic.addButtonsToBoard(this, this.getNrOfRows(), this.nrOfColumns, true);
-            repaint();
-            revalidate();
+            startNewGame(true);
         });
 
 
@@ -128,6 +121,14 @@ public class Game extends JFrame implements ActionListener {
         }
 
         logic.checkForVictory(this); //change to rungame later, argument gamelayout
+    }
+
+    private void startNewGame(boolean cheat) {
+        buttonPanel.removeAll();
+        logic.addTilesToBoard(this, this.nrOfRows, this.nrOfColumns,cheat);
+        cardLayout.show(cardPanel, "buttons");
+        repaint();
+        revalidate();
     }
 
 
