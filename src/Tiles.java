@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class Tiles extends JButton {
     private int rowNr;
@@ -17,7 +18,4 @@ public class Tiles extends JButton {
     public int getColumnNr() {
         return columnNr;
     }
-
-
-    
 }

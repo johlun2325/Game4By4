@@ -6,13 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game extends JFrame implements ActionListener {
-    TileGenerator tileGenerator = new TileGenerator();
-    GameLogic logic = new GameLogic();
+    TileGenerator tileGenerator;
+    GameLogic logic;
+    GameSounds gameSounds;
 
-    GameSounds gameSounds = new GameSounds();
-
-    protected List<String> listInCorrectOrder = new ArrayList<>();
-    protected List<Tiles> listOfShuffledTiles = new ArrayList<>();
+    protected List<String> listInCorrectOrder;
+    protected List<Tiles> listOfShuffledTiles;
 
     private final int nrOfRows = 4;
     private final int nrOfColumns = 4;
@@ -38,9 +37,9 @@ public class Game extends JFrame implements ActionListener {
 
     public Game() {
         setTitle("Game of 15");
+        this.initializeComponents();
         logic.initializeListWithNumbersInCorrectOrder(this);
 
-        this.initializeComponents();
 
         logic.addTilesToBoard(this, getNrOfRows(), getNrOfColumns(), false);
 
@@ -66,6 +65,13 @@ public class Game extends JFrame implements ActionListener {
     }
 
     private void initializeComponents() {
+
+        listOfShuffledTiles = new ArrayList<>();
+        listInCorrectOrder = new ArrayList<>();
+        gameSounds = new GameSounds();
+        logic = new GameLogic();
+        tileGenerator = new TileGenerator();
+
         cardLayout = new CardLayout();
 
         victoryLabel = new JLabel("Victory!");
@@ -122,8 +128,6 @@ public class Game extends JFrame implements ActionListener {
         }
         logic.checkForVictory(this);
     }
-
-
 
 }
 

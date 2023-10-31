@@ -9,8 +9,6 @@ public class GameLogic {
     public void initializeListWithNumbersInCorrectOrder(Game gameLayout) {
         gameLayout.listInCorrectOrder = generateNumberListBasedOnRowsAndColumns(gameLayout.getNrOfRows(), gameLayout.getNrOfColumns());
         gameLayout.listInCorrectOrder.add("");
-
-
     }
 
     public void addTilesToBoard(Game gameLayout, int nrOfRows, int nrOfColumns, boolean cheat) {
