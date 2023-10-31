@@ -38,8 +38,6 @@ public class Game extends JFrame implements ActionListener {
 
     CardLayout cardLayout;
 
-
-
     public Game() {
         setTitle("Game of 15");
         logic.initializeListWithNumbersInCorrectOrder(this);
@@ -58,10 +56,12 @@ public class Game extends JFrame implements ActionListener {
             startNewGame(true);
         });
 
-
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.addComponents();
-        this.add(gamePanel);
+        this.setUp();
+    }
+
+    private void setUp(){
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setVisible(true);
         this.pack();
@@ -69,7 +69,6 @@ public class Game extends JFrame implements ActionListener {
 
     private void initializeComponents() {
         cardLayout = new CardLayout();
-
 
         victoryLabel = new JLabel("Victory!");
         Font victoryFont = new Font("Helvetica", Font.ITALIC,108);
@@ -80,7 +79,6 @@ public class Game extends JFrame implements ActionListener {
         namePanel = new JPanel(new BorderLayout());
         buttonPanel = new JPanel(new GridLayout(nrOfRows, nrOfColumns));
         gamePanel = new JPanel(new BorderLayout());
-
     }
 
     private void addComponents() {
@@ -95,9 +93,8 @@ public class Game extends JFrame implements ActionListener {
         gamePanel.add(namePanel, BorderLayout.NORTH);
         gamePanel.add(cardPanel, BorderLayout.CENTER);
 
-        //setting what cardLayout to show at the beginning
         cardLayout.show(cardPanel, "buttons");
-
+        this.add(gamePanel);
     }
 
     @Override
@@ -109,18 +106,15 @@ public class Game extends JFrame implements ActionListener {
                 continue;
             }
 
-            if (logic.isAdjacent(clickedTile, tile)) { //kallar på metod via gamelogic
+            if (logic.isAdjacent(clickedTile, tile)) {
                 String temp = clickedTile.getText();
                 clickedTile.setText(tile.getText());
                 tile.setText(temp);
                 gameSounds.playTileSound();
 
             }
-
-
         }
-
-        logic.checkForVictory(this); //change to rungame later, argument gamelayout
+        logic.checkForVictory(this);
     }
 
     private void startNewGame(boolean cheat) {
