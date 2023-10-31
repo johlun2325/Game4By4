@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,7 +32,7 @@ public class Game extends JFrame implements ActionListener {
 
     JLabel victoryLabel;
 
-    JButton newGameBtn; JButton cheatButton;
+    JButton newGameButton; JButton cheatButton;
 
     CardLayout cardLayout;
 
@@ -40,15 +41,12 @@ public class Game extends JFrame implements ActionListener {
         this.initializeComponents();
         logic.initializeListWithNumbersInCorrectOrder(this);
 
-
         logic.addTilesToBoard(this, getNrOfRows(), getNrOfColumns(), false);
 
-        newGameBtn = new JButton("New Game");
-        newGameBtn.addActionListener(l -> {
+        newGameButton.addActionListener(l -> {
             startNewGame(false);
         });
 
-        cheatButton = new JButton("Cheat");
         cheatButton.addActionListener(l -> {
             startNewGame(true);
         });
@@ -72,11 +70,20 @@ public class Game extends JFrame implements ActionListener {
         logic = new GameLogic();
         tileGenerator = new TileGenerator();
 
+        cheatButton = new JButton("Cheat");
+        cheatButton.setPreferredSize(new Dimension(100,50));
+        cheatButton.setFocusable(false);
+
+        newGameButton = new JButton("New Game");
+        newGameButton.setPreferredSize(new Dimension(100,50));
+        newGameButton.setFocusable(false);
+
         cardLayout = new CardLayout();
 
         victoryLabel = new JLabel("Victory!");
         Font victoryFont = new Font("Helvetica", Font.ITALIC,108);
         victoryLabel.setFont(victoryFont);
+        victoryLabel.setForeground(new Color(255, 215, 0));
 
         cardPanel = new JPanel(cardLayout);
         victoryPanel = new JPanel(new BorderLayout());
@@ -91,7 +98,7 @@ public class Game extends JFrame implements ActionListener {
 
         victoryPanel.add(victoryLabel);
 
-        namePanel.add(newGameBtn, BorderLayout.WEST);
+        namePanel.add(newGameButton, BorderLayout.WEST);
         namePanel.add(cheatButton, BorderLayout.EAST);
 
         gamePanel.add(namePanel, BorderLayout.NORTH);
