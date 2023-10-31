@@ -23,7 +23,7 @@ public class GameLogic {
             listToBeShuffled.add(String.valueOf(i));
         }
         //eller instans av tg direkt i metod? Vad är snyggast?
-        gameLayout.listOfShuffledTiles = gameLayout.tg.createListOfTiles(listToBeShuffled, nrOfRows, nrOfColumns, cheat);
+        gameLayout.listOfShuffledTiles = gameLayout.tileGenerator.createListOfTiles(listToBeShuffled, nrOfRows, nrOfColumns, cheat);
 
         for (Tiles tiles : gameLayout.listOfShuffledTiles) {
             tiles.addActionListener(gameLayout);

@@ -32,7 +32,7 @@ public class TileGenerator {
 
                     @Override
                     public void mouseEntered(MouseEvent e) {
-                        tile.setBorder(new LineBorder(Color.blue,1));
+                        tile.setBorder(new LineBorder(Color.blue,3));
                     }
 
                     @Override
