@@ -20,7 +20,7 @@ public class GameLogic {
 
         listToBeShuffled = generateNumberListBasedOnRowsAndColumns(nrOfRows, nrOfColumns);
 
-        gameLayout.listOfShuffledTiles = gameLayout.tg.createListOfTiles(listToBeShuffled, nrOfRows, nrOfColumns, cheat);
+        gameLayout.listOfShuffledTiles = gameLayout.tileGenerator.createListOfTiles(listToBeShuffled, nrOfRows, nrOfColumns, cheat);
 
         for (Tiles tiles : gameLayout.listOfShuffledTiles) {
             tiles.addActionListener(gameLayout);
