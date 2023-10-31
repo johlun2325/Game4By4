@@ -10,8 +10,6 @@ import static java.awt.Font.BOLD;
 
 public class TileGenerator {
 
-    GameLogic logic = new GameLogic();
-
     public TileGenerator() {
     }
 
